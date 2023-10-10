@@ -1,8 +1,7 @@
 # **AirBnB clone** - The console
----
 
 ## Content:
----
+
   * [Introduction](#Introduction)
   * [Installation](#Installation)
   * [Usage](#Usage)
