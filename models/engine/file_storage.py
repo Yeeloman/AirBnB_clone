@@ -24,8 +24,13 @@ class FileStorage:
             j.dump(all_obj, f)
 
     def reload(self):
+        """Deserialize the JSON file __file_path to __objects, if it exists."""
         try:
-            with open(FileStorage.__file_path, "r", encoding="utf-8") as f:
-                FileStorage.__objects = j.load(f)
+            with open(FileStorage.__file_path) as f:
+                obj_dic = j.load(f)
+                for obj in obj_dic.values():
+                    clsName = obj["__class__"]
+                    del obj["__class__"]
+                    self.new(eval(clsName)(**obj))
         except FileNotFoundError:
-            pass
+            return
