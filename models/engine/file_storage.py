@@ -3,7 +3,7 @@
     deserializes JSON file to instances
     """
 import json as j
-from models.base_model import BaseModel as BM
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -14,7 +14,7 @@ class FileStorage:
         return FileStorage.__objects
 
     def new(self, obj):
-        key = f"{obj.__class.__name__}.{obj.id}"
+        key = f"{obj.__class__.__name__}.{obj.id}"
         FileStorage.__objects[key] = obj
 
     def save(self):

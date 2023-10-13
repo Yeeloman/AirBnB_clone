@@ -2,7 +2,12 @@
 """the console program for AirBnB"""
 
 import cmd
-from models.base_model import BaseModel as BM
+from types import new_class
+from models.base_model import BaseModel
+
+classes = {
+    "BaseModel": BaseModel
+}
 
 
 class HBNBCommand(cmd.Cmd):
@@ -31,14 +36,14 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         """Creates a new instance of BaseModel"""
 
-        if line == "":
+        if not line:
             print("** class name missing **")
-        elif line != "BaseModel":
-            print("** class doesn't exist **")
+        elif line in classes.keys():
+            new_cls = classes[line]()
+            new_cls.save()
+            print(new_cls.id)
         else:
-            new_bm = BM()
-            """dont forget to save it to the JSON file"""
-            print(new_bm.id)
+            print("** class doesn't exist **")
 
     def do_show(self, line):
         """Prints the string representation of an instance"""
@@ -49,8 +54,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         elif len(token) == 1:
             print("** instance id missing **")
-        elif:
-            print("** no instance found **")
+        # elif:
+        #     print("** no instance found **")
         else:
             pass
 
