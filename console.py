@@ -62,10 +62,11 @@ class HBNBCommand(cmd.Cmd):
         Usage: create <Class_name> <Class_id>
         """
 
-        if not line:
+        token = HBNBCommand.parseLine(line)
+        if token == []:
             print("** class name missing **")
-        elif line in classes.keys():
-            new_cls = classes[line]()
+        elif token[0] in classes.keys():
+            new_cls = classes[token[0]]()
             new_cls.save()
             print(new_cls.id)
         else:
