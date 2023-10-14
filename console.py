@@ -35,9 +35,9 @@ class HBNBCommand(cmd.Cmd):
     #     """Quit: Exit the application."""
     #     return True
 
-    def do_EOF(self, line):
-        """(Ctrl+D): Exit the program."""
-        return True
+    # def do_EOF(self, line):
+    #     """(Ctrl+D): Exit the program."""
+    #     return True
 
     def do_create(self, line):
         """Creates a new instance of BaseModel
