@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
             prompt (str): The command prompt.
     """
 
-    prompt = "(hbnb) "
+    prompt = "(hbnb)"
 
     @staticmethod
     def parseLine(line):
