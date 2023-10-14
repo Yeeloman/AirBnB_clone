@@ -44,13 +44,6 @@ class HBNBCommand(cmd.Cmd):
         """emptyline and enter does nothing anymore"""
         pass
 
-    def do_help(self, arg):
-        """the interpreter's help.
-
-        Usage: help <command(optional)>
-        """
-        return super().do_help(arg)
-
     def do_quit(self, line):
         """Quit command to exit the program.
         """
