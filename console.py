@@ -27,9 +27,9 @@ class HBNBCommand(cmd.Cmd):
         """
         return list(line.split())
 
-    def emptyLine(self):
-        """emptyline and enter does nothing anymore"""
-        pass
+    # def emptyLine(self):
+    #     """emptyline and enter does nothing anymore"""
+    #     pass
 
     def do_quit(self, line):
         """Quit: Exit the application."""
