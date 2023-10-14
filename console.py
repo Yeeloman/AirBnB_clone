@@ -14,8 +14,9 @@ classes = {
 class HBNBCommand(cmd.Cmd):
     """Defines the command interpreter.
 
-    Attributes:
-        prompt (str): The command prompt."""
+        Attributes:
+            prompt (str): The command prompt.
+    """
 
     prompt = "(hbnb) "
 
