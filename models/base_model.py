@@ -7,10 +7,17 @@ import uuid
 
 
 class BaseModel:
-    """class BaseModel"""
+    """class BaseModel
+        Represent all the common functionalities of the classes in the project.
+        """
 
     def __init__(self, *args, **kwargs):
-        """__init__ function"""
+        """Initialize a new BaseModel.
+
+            Args:
+                *args (any): Unused.
+                **kwargs (dict): Key/value pairs of attributes.
+        """
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
@@ -25,7 +32,8 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """prints [<class name>] (<self.id>) <self.__dict__>"""
+        """Return the print/str representation of the BaseModel instance.
+            [<class name>] (<self.id>) <self.__dict__>"""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
@@ -34,7 +42,10 @@ class BaseModel:
         models.storage.save()
 
     def to_dict(self):
-        """returns a dictionary containing all keys/values of __dict__"""
+        """returns a dictionary of the BaseModel
+
+            to represent the class name of the object
+            the key/value pair of __class__ is included"""
         dictionary = self.__dict__.copy()
         dictionary['__class__'] = self.__class__.__name__
         dictionary['created_at'] = self.created_at.isoformat()
