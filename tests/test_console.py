@@ -41,3 +41,7 @@ class TestHBNBCommand_help(unittest.TestCase):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help quit"))
             self.assertEqual(h, output.getvalue().strip())
+
+
+if __name__ == "__main__":
+    unittest.main()
