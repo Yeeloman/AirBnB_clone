@@ -39,6 +39,7 @@ class TestFileStorage_instantiation(unittest.TestCase):
     def test_storage_initializes(self):
         self.assertEqual(type(models.storage), FileStorage)
 
+
 class TestFileStorage_methods(unittest.TestCase):
     """a class for method testing"""
 
