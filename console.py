@@ -106,11 +106,7 @@ class HBNBCommand(cmd.Cmd):
         elif f"{token[0]}.{token[1]}" not in obj_dic:
             print("** no instance found **")
         else:
-            dest_cls = f"{token[0]}.{token[1]}"
-            for key in obj_dic.keys():
-                if dest_cls == key:
-                    break
-            del obj_dic[dest_cls]
+            del obj_dic["{}.{}".format(token[0], token[1])]
             storage.save()
 
     def do_all(self, line):
