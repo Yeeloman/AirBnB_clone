@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
         """
         return list(line.split())
 
-    def emptyLine(self):
+    def emptyline(self):
         """emptyline and enter does nothing anymore.
         """
         pass
