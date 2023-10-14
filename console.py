@@ -68,28 +68,10 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class doesn't exist **")
 
-    def do_show(self, line):
-        """Prints the string representation of an instance
-
-        Usage: show <Class_name> <Class_id>
-        """
-        token = HBNBCommand.parseLine(line)
-        obj_dic = storage.all()
-        if token == []:
-            print("** class name missing **")
-        elif token[0] not in classes.keys():
-            print("** class doesn't exist **")
-        elif len(token) == 1:
-            print("** instance id missing **")
-        elif f"{token[0]}.{token[1]}" not in obj_dic:
-            print("** no instance found **")
-        else:
-            print(obj_dic["{}.{}".format(token[0], token[1])])
-
-    # def do_destroy(self, line):
-    #     """Deletes an instance based on the class name and id
+    # def do_show(self, line):
+    #     """Prints the string representation of an instance
     #
-    #     Usage: destroy <Class_name> <Class_id>
+    #     Usage: show <Class_name> <Class_id>
     #     """
     #     token = HBNBCommand.parseLine(line)
     #     obj_dic = storage.all()
@@ -102,12 +84,30 @@ class HBNBCommand(cmd.Cmd):
     #     elif f"{token[0]}.{token[1]}" not in obj_dic:
     #         print("** no instance found **")
     #     else:
-    #         dest_cls = f"{token[0]}.{token[1]}"
-    #         for key in obj_dic.keys():
-    #             if dest_cls == key:
-    #                 break
-    #         del obj_dic[dest_cls]
-    #         storage.save()
+    #         print(obj_dic["{}.{}".format(token[0], token[1])])
+
+    def do_destroy(self, line):
+        """Deletes an instance based on the class name and id
+
+        Usage: destroy <Class_name> <Class_id>
+        """
+        token = HBNBCommand.parseLine(line)
+        obj_dic = storage.all()
+        if token == []:
+            print("** class name missing **")
+        elif token[0] not in classes.keys():
+            print("** class doesn't exist **")
+        elif len(token) == 1:
+            print("** instance id missing **")
+        elif f"{token[0]}.{token[1]}" not in obj_dic:
+            print("** no instance found **")
+        else:
+            dest_cls = f"{token[0]}.{token[1]}"
+            for key in obj_dic.keys():
+                if dest_cls == key:
+                    break
+            del obj_dic[dest_cls]
+            storage.save()
 
     def do_all(self, line):
         """do_all.
