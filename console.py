@@ -53,20 +53,20 @@ class HBNBCommand(cmd.Cmd):
         print("")
         return True
 
-    # def do_create(self, line):
-    #     """Creates a new instance of BaseModel
-    #
-    #     Usage: create <Class_name> <Class_id>
-    #     """
-    #
-    #     if not line:
-    #         print("** class name missing **")
-    #     elif line in classes.keys():
-    #         new_cls = classes[line]()
-    #         new_cls.save()
-    #         print(new_cls.id)
-    #     else:
-    #         print("** class doesn't exist **")
+    def do_create(self, line):
+        """Creates a new instance of BaseModel
+
+        Usage: create <Class_name> <Class_id>
+        """
+
+        if not line:
+            print("** class name missing **")
+        elif line in classes.keys():
+            new_cls = classes[line]()
+            new_cls.save()
+            print(new_cls.id)
+        else:
+            print("** class doesn't exist **")
 
     def do_show(self, line):
         """Prints the string representation of an instance
