@@ -155,9 +155,12 @@ instances based or not on the class name
         elif len(token) == 3:
             print("** value missing **")
         else:
-            update_dic = obj_dic["{}.{}".format(token[0], token[1])]
-            attrtype = type(update_dic.__dict__[token[2]])
-            setattr(update_dic, token[2], attrtype(token[3]))
+            obj = obj_dic["{}.{}".format(token[0], token[1])]
+            if token[2] in obj.__class__.__dict__.keys():
+                valtype = type(obj.__class__.__dict__[token[2]])
+                obj.__dict__[token[2]] = valtype(token[3])
+            else:
+                obj.__dict__[token[2]] = token[3]
             storage.save()
 
 
