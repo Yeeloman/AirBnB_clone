@@ -11,7 +11,6 @@ from models.place import Place
 from models.review import Review
 from models import storage
 import json
-
 classes = {
     "BaseModel": BaseModel,
     "User": User,
@@ -156,8 +155,11 @@ instances based or not on the class name
             print("** value missing **")
         else:
             update_dic = obj_dic["{}.{}".format(token[0], token[1])]
-            attrtype = type(update_dic.__dict__[token[2]])
-            setattr(update_dic, token[2], attrtype(token[3]))
+            if token[2] in update_dic.__dict__:
+                attrtype = type(update_dic.__dict__[token[2]])
+                setattr(update_dic, token[2], attrtype(token[3]))
+            else:
+                setattr(update_dic, token[2], token[3])
             storage.save()
 
 
