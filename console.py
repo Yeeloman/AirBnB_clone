@@ -28,27 +28,13 @@ class HBNBCommand(cmd.Cmd):
         """emptyline and enter does nothing anymore"""
         pass
 
-    def do_help(self, arg):
-        """List available commands with 'help' or detailed help with 'help cmd'."""
-        if arg:
-            try:
-                func = getattr(self, 'do_' + arg)
-                print(func.__doc__)
-            except AttributeError:
-                print("No help available for '{}'".format(arg))
-        else:
-            print("Available commands:")
-            for cmd in self.get_names():
-                if cmd.startswith('do_'):
-                    print(" ", cmd[3:])
-
     def do_quit(self, line):
         """Quit: Exit the application."""
         return True
 
     def do_EOF(self, line):
         """(Ctrl+D): Exit the program."""
-        return self.do_quit(line)
+        return True
 
     def do_create(self, line):
         """Creates a new instance of BaseModel
