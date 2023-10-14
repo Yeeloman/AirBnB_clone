@@ -109,52 +109,52 @@ class HBNBCommand(cmd.Cmd):
             del obj_dic[dest_cls]
             storage.save()
 
-#     def do_all(self, line):
-#         """do_all.
-#             Prints all string representation of all\
-# instances based or not on the class name
-#
-#         Usage: all <Class_name(optional)>
-#         """
-#         all_dic = []
-#         obj_dic = storage.all()
-#         token = HBNBCommand.parseLine(line)
-#         if len(token) > 0 and token[0] not in classes.keys():
-#             print("** class doesn't exist **")
-#         elif len(token) > 0 and token[0] in classes.keys():
-#             for obj in obj_dic.values():
-#                 if token[0] == obj.__class__.__name__:
-#                     all_dic.append(obj.__str__())
-#             print(all_dic)
-#         else:
-#             for obj in obj_dic.values():
-#                 all_dic.append(obj.__str__())
-#             print(all_dic)
+    def do_all(self, line):
+        """do_all.
+            Prints all string representation of all\
+instances based or not on the class name
 
-    def do_update(self, line):
-        """Updates an instance based on the class name and id
-
-        Usage: Update <Class_name> <Class_id> <attribute> <value>
+        Usage: all <Class_name(optional)>
         """
-        token = HBNBCommand.parseLine(line)
+        all_dic = []
         obj_dic = storage.all()
-        if token == []:
-            print("** class name missing **")
-        elif token[0] not in classes.keys():
+        token = HBNBCommand.parseLine(line)
+        if len(token) > 0 and token[0] not in classes.keys():
             print("** class doesn't exist **")
-        elif len(token) == 1:
-            print("** instance id missing **")
-        elif f"{token[0]}.{token[1]}" not in obj_dic:
-            print("** no instance found **")
-        elif len(token) == 2:
-            print("** attribute name missing **")
-        elif len(token) == 3:
-            print("** value missing **")
+        elif len(token) > 0 and token[0] in classes.keys():
+            for obj in obj_dic.values():
+                if token[0] == obj.__class__.__name__:
+                    all_dic.append(obj.__str__())
+            print(all_dic)
         else:
-            update_dic = obj_dic["{}.{}".format(token[0], token[1])]
-            attrtype = type(update_dic.__dict__[token[2]])
-            setattr(update_dic, token[2], attrtype(token[3]))
-            storage.save()
+            for obj in obj_dic.values():
+                all_dic.append(obj.__str__())
+            print(all_dic)
+
+    # def do_update(self, line):
+    #     """Updates an instance based on the class name and id
+    #
+    #     Usage: Update <Class_name> <Class_id> <attribute> <value>
+    #     """
+    #     token = HBNBCommand.parseLine(line)
+    #     obj_dic = storage.all()
+    #     if token == []:
+    #         print("** class name missing **")
+    #     elif token[0] not in classes.keys():
+    #         print("** class doesn't exist **")
+    #     elif len(token) == 1:
+    #         print("** instance id missing **")
+    #     elif f"{token[0]}.{token[1]}" not in obj_dic:
+    #         print("** no instance found **")
+    #     elif len(token) == 2:
+    #         print("** attribute name missing **")
+    #     elif len(token) == 3:
+    #         print("** value missing **")
+    #     else:
+    #         update_dic = obj_dic["{}.{}".format(token[0], token[1])]
+    #         attrtype = type(update_dic.__dict__[token[2]])
+    #         setattr(update_dic, token[2], attrtype(token[3]))
+    #         storage.save()
 
 
 if __name__ == '__main__':
