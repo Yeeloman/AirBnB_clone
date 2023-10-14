@@ -30,7 +30,7 @@ class HBNBCommand(cmd.Cmd):
             prompt (str): The command prompt.
     """
 
-    prompt = "(hbnb)"
+    prompt = "(hbnb) "
 
     @staticmethod
     def parseLine(line):
@@ -43,6 +43,13 @@ class HBNBCommand(cmd.Cmd):
     def emptyLine(self):
         """emptyline and enter does nothing anymore"""
         pass
+
+    def do_help(self, arg):
+        """the interpreter's help.
+
+        Usage: help <command(optional)>
+        """
+        return super().do_help(arg)
 
     def do_quit(self, line):
         """Quit command to exit the program.
