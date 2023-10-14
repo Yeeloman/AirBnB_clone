@@ -53,38 +53,38 @@ class HBNBCommand(cmd.Cmd):
         print("")
         return True
 
-    def do_create(self, line):
-        """Creates a new instance of BaseModel
-
-        Usage: create <Class_name> <Class_id>
-        """
-
-        if not line:
-            print("** class name missing **")
-        elif line in classes.keys():
-            new_cls = classes[line]()
-            new_cls.save()
-            print(new_cls.id)
-        else:
-            print("** class doesn't exist **")
-
-    # def do_show(self, line):
-    #     """Prints the string representation of an instance
+    # def do_create(self, line):
+    #     """Creates a new instance of BaseModel
     #
-    #     Usage: show <Class_name> <Class_id>
+    #     Usage: create <Class_name> <Class_id>
     #     """
-    #     token = HBNBCommand.parseLine(line)
-    #     obj_dic = storage.all()
-    #     if token == []:
+    #
+    #     if not line:
     #         print("** class name missing **")
-    #     elif token[0] not in classes.keys():
-    #         print("** class doesn't exist **")
-    #     elif len(token) == 1:
-    #         print("** instance id missing **")
-    #     elif f"{token[0]}.{token[1]}" not in obj_dic:
-    #         print("** no instance found **")
+    #     elif line in classes.keys():
+    #         new_cls = classes[line]()
+    #         new_cls.save()
+    #         print(new_cls.id)
     #     else:
-    #         print(obj_dic["{}.{}".format(token[0], token[1])])
+    #         print("** class doesn't exist **")
+
+    def do_show(self, line):
+        """Prints the string representation of an instance
+
+        Usage: show <Class_name> <Class_id>
+        """
+        token = HBNBCommand.parseLine(line)
+        obj_dic = storage.all()
+        if token == []:
+            print("** class name missing **")
+        elif token[0] not in classes.keys():
+            print("** class doesn't exist **")
+        elif len(token) == 1:
+            print("** instance id missing **")
+        elif f"{token[0]}.{token[1]}" not in obj_dic:
+            print("** no instance found **")
+        else:
+            print(obj_dic["{}.{}".format(token[0], token[1])])
 
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id
