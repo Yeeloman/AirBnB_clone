@@ -109,27 +109,27 @@ class HBNBCommand(cmd.Cmd):
             del obj_dic[dest_cls]
             storage.save()
 
-    def do_all(self, line):
-        """do_all.
-            Prints all string representation of all\
-instances based or not on the class name
-
-        Usage: all <Class_name(optional)>
-        """
-        all_dic = []
-        obj_dic = storage.all()
-        token = HBNBCommand.parseLine(line)
-        if len(token) > 0 and token[0] not in classes.keys():
-            print("** class doesn't exist **")
-        elif len(token) > 0 and token[0] in classes.keys():
-            for obj in obj_dic.values():
-                if token[0] == obj.__class__.__name__:
-                    all_dic.append(obj.__str__())
-            print(all_dic)
-        else:
-            for obj in obj_dic.values():
-                all_dic.append(obj.__str__())
-            print(all_dic)
+#     def do_all(self, line):
+#         """do_all.
+#             Prints all string representation of all\
+# instances based or not on the class name
+#
+#         Usage: all <Class_name(optional)>
+#         """
+#         all_dic = []
+#         obj_dic = storage.all()
+#         token = HBNBCommand.parseLine(line)
+#         if len(token) > 0 and token[0] not in classes.keys():
+#             print("** class doesn't exist **")
+#         elif len(token) > 0 and token[0] in classes.keys():
+#             for obj in obj_dic.values():
+#                 if token[0] == obj.__class__.__name__:
+#                     all_dic.append(obj.__str__())
+#             print(all_dic)
+#         else:
+#             for obj in obj_dic.values():
+#                 all_dic.append(obj.__str__())
+#             print(all_dic)
 
     def do_update(self, line):
         """Updates an instance based on the class name and id
