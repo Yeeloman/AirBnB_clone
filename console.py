@@ -14,7 +14,6 @@ classes = {
 class HBNBCommand(cmd.Cmd):
     """HBNBCommand."""
 
-    intro = "Welcome to AirBnB Clone - The console\n"
     prompt = "(hbnb) "
 
     @staticmethod
