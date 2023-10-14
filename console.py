@@ -135,55 +135,30 @@ instances based or not on the class name
                 all_dic.append(obj.__str__())
             print(all_dic)
 
-    def do_update(self, arg):
-        """Usage: update <class> <id> <attribute_name> <attribute_value> or
-       <class>.update(<id>, <attribute_name>, <attribute_value>) or
-       <class>.update(<id>, <dictionary>)
-        Update a class instance of a given id by adding or updating
-        a given attribute key/value pair or dictionary."""
-        argl = HBNBCommand.parseLine(arg)
-        objdict = storage.all()
+    def do_update(self, line):
+        """Updates an instance based on the class name and id
 
-        if len(argl) == 0:
+        Usage: Update <Class_name> <Class_id> <attribute> <value>
+        """
+        token = HBNBCommand.parseLine(line)
+        obj_dic = storage.all()
+        if token == []:
             print("** class name missing **")
-            return False
-        if argl[0] not in classes.keys():
+        elif token[0] not in classes.keys():
             print("** class doesn't exist **")
-            return False
-        if len(argl) == 1:
+        elif len(token) == 1:
             print("** instance id missing **")
-            return False
-        if "{}.{}".format(argl[0], argl[1]) not in objdict.keys():
+        elif f"{token[0]}.{token[1]}" not in obj_dic:
             print("** no instance found **")
-            return False
-        if len(argl) == 2:
+        elif len(token) == 2:
             print("** attribute name missing **")
-            return False
-        if len(argl) == 3:
-            try:
-                type(eval(argl[2])) != dict
-            except NameError:
-                print("** value missing **")
-                return False
-
-        if len(argl) == 4:
-            obj = objdict["{}.{}".format(argl[0], argl[1])]
-            if argl[2] in obj.__class__.__dict__.keys():
-                valtype = type(obj.__class__.__dict__[argl[2]])
-                obj.__dict__[argl[2]] = valtype(argl[3])
-            else:
-                obj.__dict__[argl[2]] = argl[3]
-        elif type(eval(argl[2])) == dict:
-            obj = objdict["{}.{}".format(argl[0], argl[1])]
-            for k, v in eval(argl[2]).items():
-                if (k in obj.__class__.__dict__.keys() and
-                        type(obj.__class__.__dict__[k]) in {str, int, float}):
-                    valtype = type(obj.__class__.__dict__[k])
-                    obj.__dict__[k] = valtype(v)
-                else:
-                    obj.__dict__[k] = v
-        storage.save()
-        storage.save()
+        elif len(token) == 3:
+            print("** value missing **")
+        else:
+            update_dic = obj_dic["{}.{}".format(token[0], token[1])]
+            attrtype = type(update_dic.__dict__[token[2]])
+            setattr(update_dic, token[2], attrtype(token[3]))
+            storage.save()
 
 
 if __name__ == '__main__':
