@@ -3,19 +3,22 @@
 
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 import json
 
 classes = {
-    "BaseModel": BaseModel
+    "BaseModel": BaseModel,
+    "User": User
 }
 
 
 class HBNBCommand(cmd.Cmd):
     """Defines the command interpreter.
 
-    Attributes:
-        prompt (str): The command prompt."""
+        Attributes:
+            prompt (str): The command prompt.
+    """
 
     prompt = "(hbnb) "
 
