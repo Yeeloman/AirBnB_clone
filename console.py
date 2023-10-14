@@ -12,7 +12,10 @@ classes = {
 
 
 class HBNBCommand(cmd.Cmd):
-    """HBNBCommand."""
+    """Defines the command interpreter.
+
+    Attributes:
+        prompt (str): The command prompt."""
 
     prompt = "(hbnb) "
 
@@ -39,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
     def do_create(self, line):
         """Creates a new instance of BaseModel
 
-        :param line: the arguments of the command.
+        Usage: create <Class_name> <Class_id>
         """
 
         if not line:
@@ -54,7 +57,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, line):
         """Prints the string representation of an instance
 
-        :param line: the arguments of the command.
+        Usage: show <Class_name> <Class_id>
         """
         token = HBNBCommand.parseLine(line)
         obj_dic = storage.all()
@@ -72,7 +75,7 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id
 
-        :param line: the arguments of the command.
+        Usage: destroy <Class_name> <Class_id>
         """
         token = HBNBCommand.parseLine(line)
         obj_dic = storage.all()
@@ -97,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
             Prints all string representation of all\
 instances based or not on the class name
 
-        :param line: the arguments of the command
+        Usage: all <Class_name(optional)>
         """
         all_dic = []
         obj_dic = storage.all()
@@ -117,7 +120,7 @@ instances based or not on the class name
     def do_update(self, line):
         """Updates an instance based on the class name and id
 
-        :param line: the arguments of the command.
+        Usage: Update <Class_name> <Class_id> <attribute> <value>
         """
         token = HBNBCommand.parseLine(line)
         obj_dic = storage.all()
