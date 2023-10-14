@@ -94,7 +94,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, line):
         """do_all.
-            Prints all string representation of all instances based or not on the class name
+            Prints all string representation of all\
+instances based or not on the class name
 
         :param line: the arguments of the command
         """

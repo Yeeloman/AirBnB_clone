@@ -32,7 +32,8 @@ class FileStorage:
             j.dump(all_obj, f)
 
     def reload(self):
-        """reload: Deserialize the JSON file __file_path to __objects, if it exists."""
+        """reload: Deserialize the JSON file\
+__file_path to __objects, if it exists."""
         try:
             with open(FileStorage.__file_path) as f:
                 obj_dic = j.load(f)
