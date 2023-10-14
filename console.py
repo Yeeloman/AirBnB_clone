@@ -19,7 +19,10 @@ class HBNBCommand(cmd.Cmd):
 
     @staticmethod
     def parseLine(line):
-        """parses the input line into tokens"""
+        """parses the input line into tokens
+
+        :param line: the arguments of the command.
+        """
         return list(line.split())
 
     def emptyLine(self):
@@ -35,7 +38,10 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, line):
-        """Creates a new instance of BaseModel"""
+        """Creates a new instance of BaseModel
+
+        :param line: the arguments of the command.
+        """
 
         if not line:
             print("** class name missing **")
@@ -47,7 +53,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, line):
-        """Prints the string representation of an instance"""
+        """Prints the string representation of an instance
+
+        :param line: the arguments of the command.
+        """
         token = HBNBCommand.parseLine(line)
         obj_dic = storage.all()
         if token == []:
@@ -62,7 +71,10 @@ class HBNBCommand(cmd.Cmd):
             print(obj_dic["{}.{}".format(token[0], token[1])])
 
     def do_destroy(self, line):
-        """Deletes an instance based on the class name and id"""
+        """Deletes an instance based on the class name and id
+
+        :param line: the arguments of the command.
+        """
         token = HBNBCommand.parseLine(line)
         obj_dic = storage.all()
         if token == []:
@@ -82,6 +94,11 @@ class HBNBCommand(cmd.Cmd):
             storage.save()
 
     def do_all(self, line):
+        """do_all.
+            Prints all string representation of all instances based or not on the class name
+
+        :param line: the arguments of the command
+        """
         all_dic = []
         obj_dic = storage.all()
         token = HBNBCommand.parseLine(line)
@@ -98,7 +115,10 @@ class HBNBCommand(cmd.Cmd):
             print(all_dic)
 
     def do_update(self, line):
-        """Updates an instance based on the class name and id"""
+        """Updates an instance based on the class name and id
+
+        :param line: the arguments of the command.
+        """
         token = HBNBCommand.parseLine(line)
         obj_dic = storage.all()
         if token == []:
