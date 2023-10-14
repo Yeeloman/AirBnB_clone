@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""the console program for AirBnB"""
+"""the console program for AirBnB."""
 
 import cmd
 from models.base_model import BaseModel
@@ -41,7 +41,8 @@ class HBNBCommand(cmd.Cmd):
         return list(line.split())
 
     def emptyLine(self):
-        """emptyline and enter does nothing anymore"""
+        """emptyline and enter does nothing anymore.
+        """
         pass
 
     def do_quit(self, line):
@@ -50,7 +51,8 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_EOF(self, line):
-        """(Ctrl+D): Exit the program."""
+        """(Ctrl+D): Exit the program.
+        """
         print("")
         return True
 
