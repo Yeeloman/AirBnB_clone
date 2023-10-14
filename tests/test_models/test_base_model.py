@@ -84,6 +84,7 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertEqual(bm.created_at, dt)
         self.assertEqual(bm.updated_at, dt)
 
+
 class TestBaseModel_to_dict(unittest.TestCase):
     """a class for dictionary test"""
 
@@ -184,6 +185,7 @@ class TestBaseModel_save(unittest.TestCase):
         bmid = "BaseModel." + bm.id
         with open("file.json", "r") as f:
             self.assertIn(bmid, f.read())
+
 
 if __name__ == "__main__":
     unittest.main()
