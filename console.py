@@ -67,8 +67,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif token[0] in classes.keys():
             new_cls = classes[token[0]]()
-            new_cls.save()
             print(new_cls.id)
+            storage.save()
         else:
             print("** class doesn't exist **")
 
