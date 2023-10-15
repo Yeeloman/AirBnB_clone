@@ -246,15 +246,15 @@ instances based or not on the class name
                 print("** instance id missing **")
             elif f"{cls_name[0]}.{cls_id[0][0]}" not in obj_dic:
                 print("** no instance found **")
-            elif cls_dic == "{}":
-                print("** no dictionary found **")
+            # elif cls_dic == "{}":
+            #     print("** no dictionary found **")
             else:
                 update_dic = obj_dic["{}.{}".format(
                     cls_name[0], cls_id[0][0])]
                 try:
                     add_dic = json.loads(cls_dic)
                 except:
-                    print("** Invalid dictionary")
+                    print("** invalid syntax")
                     return
                 for add_key, add_value in add_dic.items():
                     if add_key in update_dic.__dict__:
