@@ -73,8 +73,6 @@ class HBNBCommand(cmd.Cmd):
             if matching.group(2) in cmd_methods:
                 call = cmd_methods[matching.group(2)]
                 call(matching.group(1))
-            else:
-                print(f"*** Unknown syntax: {line}")
         else:
             print(f"*** Unknown syntax: {line}")
 
