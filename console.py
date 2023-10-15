@@ -251,7 +251,7 @@ instances based or not on the class name
                     cls_name[0], cls_id[0][0])]
                 try:
                     add_dic = json.loads(cls_dic)
-                except:
+                except json.JSONDecodeError:
                     print("** invalid syntax")
                     return
                 for add_key, add_value in add_dic.items():
