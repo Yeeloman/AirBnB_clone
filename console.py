@@ -12,7 +12,6 @@ from models.review import Review
 from models import storage
 import json
 import re
-from icecream import ic
 
 classes = {
     "BaseModel": BaseModel,
