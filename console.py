@@ -11,6 +11,8 @@ from models.place import Place
 from models.review import Review
 from models import storage
 import json
+import re
+
 classes = {
     "BaseModel": BaseModel,
     "User": User,
@@ -43,6 +45,23 @@ class HBNBCommand(cmd.Cmd):
         """emptyline and enter does nothing anymore.
         """
         pass
+
+    def default(self, line):
+        cmd_methods = {
+            "all": self.do_all,
+            "create": self.do_create,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "update": self.do_update,
+            # "countr": self.count
+        }
+        matching = re.search(r"(\w+)\.(\w+)", line)
+        if matching:
+            if matching.group(2) in cmd_methods:
+                call = cmd_methods[matching.group(2)]
+                call(matching.group(1))
+        else:
+            print(f"*** Unknown syntax: {line}")
 
     def do_quit(self, line):
         """Quit command to exit the program.
