@@ -235,7 +235,7 @@ instances based or not on the class name
                 storage.save()
         else:
             cls_name = re.findall(r"^(\w+)", line)
-            cls_id = re.findall(r"\s+['\"]((\w+-){4}\w+)['\"]", line)
+            cls_id = re.findall(r"\s+['\"]?((\w+-){4}\w+)['\"]?", line)
             cls_dic_raw = re.findall(r"({.*})", line)
             cls_dic = cls_dic_raw[0].replace("'", "\"")
             if not cls_name:
