@@ -42,6 +42,10 @@ class HBNBCommand(cmd.Cmd):
         return list(line.split())
 
     def countInstance(self, cls_name):
+        """countInstance: counts the number of instances for a specific obj.
+
+        Usage: <Class name>.count()
+        """
         storage_dic = storage.all()
         counter = 0
         if cls_name not in classes.keys():
@@ -59,6 +63,10 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def default(self, line):
+        """default.
+
+        overrides the default behavior of cmd
+        """
         cmd_methods = {
             "all": self.do_all,
             "create": self.do_create,
@@ -68,7 +76,7 @@ class HBNBCommand(cmd.Cmd):
             "count": self.countInstance
         }
         matching = re.search(
-            r"(\w+)\.(\w+)\((.+)?,?\s?(.+)?,?\s?(.+)?\)", line)
+            r"(\w+)\.(\w+)\((.*?)?(?:, (.*?))?(?:, (.*?))?\)", line)
         if matching:
             if matching.group(2) in cmd_methods:
                 call = cmd_methods[matching.group(2)]
@@ -83,7 +91,8 @@ class HBNBCommand(cmd.Cmd):
                     call(args)
                 else:
                     args = matching.group(
-                        1) + " " + matching.group(3) + " " + matching.group(4) + " " + matching.group(5)
+                        1) + " " + matching.group(3) + " " +\
+                        matching.group(4) + " " + matching.group(5)
                     call(args)
             else:
                 print(f"*** Unknown syntax: {line}")
