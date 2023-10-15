@@ -75,29 +75,44 @@ class HBNBCommand(cmd.Cmd):
             "update": self.do_update,
             "count": self.countInstance
         }
-        matching = re.search(
-            r"(\w+)\.(\w+)\((.*?)?(?:, (.*?))?(?:, (.*?))?\)", line)
-        if matching:
-            if matching.group(2) in cmd_methods:
-                call = cmd_methods[matching.group(2)]
-                if not matching.group(3):
-                    call(matching.group(1))
-                elif not matching.group(4):
-                    args = matching.group(1) + " " + matching.group(3)
-                    call(args)
-                elif not matching.group(5):
-                    args = matching.group(
-                        1) + " " + matching.group(3) + " " + matching.group(4)
-                    call(args)
+        if "{" not in line:
+            matching = re.search(
+                r"(\w+)\.(\w+)\((.*?)?(?:, (.*?))?(?:, (.*?))?\)", line)
+            if matching:
+                if matching.group(2) in cmd_methods:
+                    call = cmd_methods[matching.group(2)]
+                    if not matching.group(3):
+                        call(matching.group(1))
+                    elif not matching.group(4):
+                        args = matching.group(1) + " " + matching.group(3)
+                        call(args)
+                    elif not matching.group(5):
+                        args = matching.group(
+                            1) + " " + matching.group(3) +\
+                            " " + matching.group(4)
+                        call(args)
+                    else:
+                        args = matching.group(
+                            1) + " " + matching.group(3) + " " +\
+                            matching.group(4) + " " + matching.group(5)
+                        call(args)
                 else:
-                    args = matching.group(
-                        1) + " " + matching.group(3) + " " +\
-                        matching.group(4) + " " + matching.group(5)
-                    call(args)
+                    print(f"*** Unknown syntax: {line}")
             else:
                 print(f"*** Unknown syntax: {line}")
         else:
-            print(f"*** Unknown syntax: {line}")
+            matching = re.search(r"(\w+)\.(\w+)\((.*?)?(?:, )(.*?)?\)", line)
+            if matching:
+                if matching.group(2) in cmd_methods:
+                    call = cmd_methods[matching.group(2)]
+                    args = matching.group(
+                        1) + " " + matching.group(3) + " " +\
+                        matching.group(4)
+                    call(args)
+                else:
+                    print(f"*** Unknown syntax: {line}")
+            else:
+                print(f"*** Unknown syntax: {line}")
 
     def do_quit(self, line):
         """Quit command to exit the program.
@@ -194,28 +209,48 @@ instances based or not on the class name
 
         Usage: Update <Class_name> <Class_id> <attribute> <value>
         """
-        token = HBNBCommand.parseLine(line)
         obj_dic = storage.all()
-        if token == []:
-            print("** class name missing **")
-        elif token[0] not in classes.keys():
-            print("** class doesn't exist **")
-        elif len(token) == 1:
-            print("** instance id missing **")
-        elif f"{token[0]}.{token[1]}" not in obj_dic:
-            print("** no instance found **")
-        elif len(token) == 2:
-            print("** attribute name missing **")
-        elif len(token) == 3:
-            print("** value missing **")
-        else:
-            update_dic = obj_dic["{}.{}".format(token[0], token[1])]
-            if token[2] in update_dic.__dict__:
-                attrtype = type(update_dic.__dict__[token[2]])
-                setattr(update_dic, token[2], attrtype(token[3]))
+        if "{" not in line:
+            token = HBNBCommand.parseLine(line)
+            if token == []:
+                print("** class name missing **")
+            elif token[0] not in classes.keys():
+                print("** class doesn't exist **")
+            elif len(token) == 1:
+                print("** instance id missing **")
+            elif f"{token[0]}.{token[1]}" not in obj_dic:
+                print("** no instance found **")
+            elif len(token) == 2:
+                print("** attribute name missing **")
+            elif len(token) == 3:
+                print("** value missing **")
             else:
-                setattr(update_dic, token[2], token[3])
-            storage.save()
+                update_dic = obj_dic["{}.{}".format(token[0], token[1])]
+                if token[2] in update_dic.__dict__:
+                    attrtype = type(update_dic.__dict__[token[2]])
+                    setattr(update_dic, token[2], attrtype(token[3]))
+                else:
+                    setattr(update_dic, token[2], token[3])
+                storage.save()
+        else:
+            matching = re.search(r"(\w+)\s+([\w-]+)\s+({.*})", line)
+            if not matching:
+                print("** class name missing **")
+            elif matching.group(1) not in classes.keys():
+                print("** class doesn't exist **")
+            elif f"{matching.group(1)}.{matching.group(2)}" not in obj_dic:
+                print("** no instance found **")
+            else:
+                update_dic = obj_dic["{}.{}".format(
+                    matching.group(1), matching.group(2))]
+                add_dic = json.loads(matching.group(3))
+                for add_key, add_value in add_dic.items():
+                    if add_key in update_dic.__dict__:
+                        attrtype = type(update_dic.__dict__[add_key])
+                        setattr(update_dic, add_key, attrtype(add_value))
+                    else:
+                        setattr(update_dic, add_key, add_value)
+                storage.save()
 
 
 if __name__ == '__main__':
