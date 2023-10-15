@@ -234,8 +234,10 @@ instances based or not on the class name
                 storage.save()
         else:
             cls_name = re.findall(r"^(\w+)", line)
-            cls_id = re.findall(r"\s+((\w+-){4}\w+)", line)
-            cls_dic = re.findall(r"({.*})", line)
+            cls_id = re.findall(r"\s+\"((\w+-){4}\w+)\"", line)
+            print(cls_id)
+            cls_dic_raw = re.findall(r"({.*})", line)
+            cls_dic = cls_dic_raw[0].replace("'", "\"")
             if not cls_name:
                 print("** class name missing **")
             elif cls_name[0] not in classes.keys():
@@ -247,7 +249,7 @@ instances based or not on the class name
             else:
                 update_dic = obj_dic["{}.{}".format(
                     cls_name[0], cls_id[0][0])]
-                add_dic = json.loads(cls_dic[0])
+                add_dic = json.loads(cls_dic)
                 for add_key, add_value in add_dic.items():
                     if add_key in update_dic.__dict__:
                         attrtype = type(update_dic.__dict__[add_key])
