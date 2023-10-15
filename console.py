@@ -251,7 +251,11 @@ instances based or not on the class name
             else:
                 update_dic = obj_dic["{}.{}".format(
                     cls_name[0], cls_id[0][0])]
-                add_dic = json.loads(cls_dic)
+                try:
+                    add_dic = json.loads(cls_dic)
+                except:
+                    print("** Invalid dictionary")
+                    return
                 for add_key, add_value in add_dic.items():
                     if add_key in update_dic.__dict__:
                         attrtype = type(update_dic.__dict__[add_key])
