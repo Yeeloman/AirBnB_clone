@@ -67,11 +67,24 @@ class HBNBCommand(cmd.Cmd):
             "update": self.do_update,
             "count": self.countInstance
         }
-        matching = re.search(r"(\w+)\.(\w+)", line)
+        matching = re.search(
+            r"(\w+)\.(\w+)\((.+)?,?\s?(.+)?,?\s?(.+)?\)", line)
         if matching:
             if matching.group(2) in cmd_methods:
                 call = cmd_methods[matching.group(2)]
-                call(matching.group(1))
+                if not matching.group(3):
+                    call(matching.group(1))
+                elif not matching.group(4):
+                    args = matching.group(1) + " " + matching.group(3)
+                    call(args)
+                elif not matching.group(5):
+                    args = matching.group(
+                        1) + " " + matching.group(3) + " " + matching.group(4)
+                    call(args)
+                else:
+                    args = matching.group(
+                        1) + " " + matching.group(3) + " " + matching.group(4) + " " + matching.group(5)
+                    call(args)
             else:
                 print(f"*** Unknown syntax: {line}")
         else:
