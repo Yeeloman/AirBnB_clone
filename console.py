@@ -12,6 +12,7 @@ from models.review import Review
 from models import storage
 import json
 import re
+from icecream import ic
 
 classes = {
     "BaseModel": BaseModel,
@@ -41,6 +42,18 @@ class HBNBCommand(cmd.Cmd):
         """
         return list(line.split())
 
+    def countInstance(self, cls_name):
+        storage_dic = storage.all()
+        counter = 0
+        if cls_name not in classes.keys():
+            print("** class doesn't exist **")
+            return
+        for key in storage_dic.keys():
+            matching = re.search(r"^({})\..+".format(cls_name), key)
+            if matching:
+                counter += 1
+        print(counter)
+
     def emptyline(self):
         """emptyline and enter does nothing anymore.
         """
@@ -53,7 +66,7 @@ class HBNBCommand(cmd.Cmd):
             "show": self.do_show,
             "destroy": self.do_destroy,
             "update": self.do_update,
-            # "countr": self.count
+            "count": self.countInstance
         }
         matching = re.search(r"(\w+)\.(\w+)", line)
         if matching:
