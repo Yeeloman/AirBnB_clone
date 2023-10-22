@@ -35,14 +35,12 @@ button[type="button"]:hover {
   float: left;
 }
 h3 {
-  color: black;
   font-weight: 600;
   padding-bottom: 0px;
   margin-bottom: 0px;
   padding-left: 20px;
 }
 h4 {
-  color: black;
   font-weight: 400;
   font-size: 14px;
   padding-top: 0px;

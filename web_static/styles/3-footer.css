@@ -6,9 +6,6 @@ footer {
   text-align: center;
   font-size: 9px;
   border-top: 1px solid #CCCCCC;
-  position: absolute;
+  position: fixed;
   bottom: 0;
-}
-p {
-  color: black;
 }
