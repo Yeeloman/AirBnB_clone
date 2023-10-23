@@ -79,17 +79,22 @@
 .user {
   transform: translateY(-120%);
 }
+.places .amenities {
+  transform: translateX(-5%);
+}
 .places .amenities,
 .places .reviews {
   margin-top: 40px;
   width: 100%;
   height: inherit;
 }
+
 .places .amenities ul,
 .places .reviews ul {
   list-style-type: none;
   padding: 0;
 }
+
 .places .amenities h2,
 .places .reviews h2 {
   font-size: 16px;
@@ -99,10 +104,13 @@
 
 .places .reviews h3 {
   font-size: 14px;
+  padding: 0px;
 }
 
 .places .reviews p {
   font-size: 12px;
+  padding: 0;
+  margin: 0px;
 }
 .places .amenities ul li {
   display: flex;
@@ -112,7 +120,19 @@
   margin-bottom: 10px;
   align-items: end;
 }
-.places .theone {
-  display: flex;
-  flex-direction: column;
+
+.pet_icon {
+  background-image: url(../images/icon_pets.png);
+}
+.wifi_icon {
+  background-image: url(../images/icon_wifi.png);
+}
+
+.pet_icon,
+.wifi_icon {
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
 }
