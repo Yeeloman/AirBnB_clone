@@ -127,12 +127,27 @@
 .wifi_icon {
   background-image: url(../images/icon_wifi.png);
 }
+.tv_icon {
+  background-image: url(../images/icon_tv.png);
+}
 
 .pet_icon,
-.wifi_icon {
+.wifi_icon,
+.tv_icon {
   background-size: cover;
   background-repeat: no-repeat;
   width: 20px;
   height: 20px;
   display: inline-block;
+}
+.pets, .wifi, .tv {
+  display: flex;
+  flex-direction: row;
+}
+.pets p, .wifi p, .tv p {
+  margin: 0;
+  margin-left: 1rem;
+}
+.places .amenities {
+  margin-bottom: 2rem;
 }
